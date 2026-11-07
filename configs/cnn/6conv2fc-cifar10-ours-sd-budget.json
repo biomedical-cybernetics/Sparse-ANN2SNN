@@ -1,0 +1,118 @@
+{
+  "id": "6conv2fc-cifar10-ours-sd-budget",
+  "engine": "cnn",
+  "stage": "train",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "world_size": 1,
+  "paper": [
+    "Table 4"
+  ],
+  "parameters": {
+    "backend": "stbp_ablation",
+    "job": {
+      "scheme": "linear-only",
+      "dataset": "CIFAR10",
+      "baseline": "sd",
+      "lr": 0.1,
+      "batch": 128,
+      "ann_precision": "fp32"
+    },
+    "checkpoint_selection": {
+      "metric": "accuracy",
+      "tie": "earliest",
+      "require_final_mask_budget": true
+    },
+    "budget": {
+      "classes": 10,
+      "conv_zero_weights": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "layer_integerization_error": [
+        -189,
+        -4608,
+        -17280,
+        -18432,
+        -69120,
+        -179712
+      ],
+      "linear_compensation_weights": 289341.333333333,
+      "linear_sparsity": 0.4538347125053406,
+      "linear_zero_weights": 7614083,
+      "overall_sparsity": 0.3565158341124716,
+      "scheme": "linear-only",
+      "total_weights": 21356928,
+      "total_zero_weights": 7614083
+    },
+    "training_configuration": {
+      "variant": "dropout05",
+      "epochs": 600,
+      "precision": "fp32",
+      "dropout": {
+        "conv": 0,
+        "hidden_linear": 0.5
+      },
+      "linear_initial_sparsity": 0.2,
+      "linear_updates": 450,
+      "conv_updates": 0,
+      "linear_regrowth": "CH3_L3n_soft",
+      "degree_dist": "uniform",
+      "brf_r": 0.1,
+      "optimizer": {
+        "name": "SGD",
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "nesterov": true
+      },
+      "scheduler": {
+        "warmup_epochs": 5,
+        "start_factor": 0.1,
+        "cosine_T_max": 595,
+        "eta_min": 1e-05
+      },
+      "linear": {
+        "granet": true,
+        "scheduler": "s_shape",
+        "method": "ri",
+        "k": 6,
+        "remove": "weight_magnitude_soft",
+        "zeta": 0.3,
+        "adaptive_zeta": true,
+        "chain_removal": true,
+        "sampling_delta": [
+          0.5,
+          0.75
+        ],
+        "delta_schedule": "linear"
+      },
+      "conv": {
+        "density": "fixed",
+        "update_ratio": 0.05,
+        "regrowth": "CH3",
+        "delta_remove": 1.0,
+        "sampling_delta": [
+          0.25,
+          0.75
+        ],
+        "delta_increment": 0.01,
+        "initialization": "random",
+        "cm": false
+      },
+      "determinism": "Python/NumPy/PyTorch seeded; strict deterministic algorithms"
+    }
+  },
+  "required_inputs": [],
+  "outputs": {
+    "checkpoint": "artifacts/best_model.pth",
+    "masks": "artifacts/best_masks.pth",
+    "resume": "artifacts/checkpoints/last_checkpoint.pth"
+  }
+}

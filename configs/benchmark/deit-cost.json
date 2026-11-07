@@ -1,0 +1,28 @@
+{
+  "id": "deit-cost",
+  "engine": "benchmark",
+  "stage": "benchmark",
+  "seeds": [0, 1, 2],
+  "paper": ["Table 3"],
+  "required_inputs": [],
+  "parameters": {
+    "model": "deit_base_patch16_224",
+    "dataset": "ImageNet-1K",
+    "gpu_count": 8,
+    "batch_per_gpu": 128,
+    "precision": "fp16",
+    "target_epochs": 300,
+    "steps_per_epoch": 1251,
+    "ordinary_rounds": 4,
+    "ordinary_batches": 100,
+    "topology_update_positions": 36,
+    "update_repeats": 3,
+    "update_batches": 10,
+    "warmup_batches": 50,
+    "memory_sampling_interval_seconds": 0.1,
+    "time_metric": "phase_weighted_training_time_projection",
+    "memory_metric": "maximum_simultaneous_eight_gpu_memory_sum",
+    "output_time_unit": "hour",
+    "output_memory_unit": "GiB"
+  }
+}

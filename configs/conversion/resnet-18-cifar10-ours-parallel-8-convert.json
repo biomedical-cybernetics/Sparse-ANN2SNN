@@ -1,0 +1,44 @@
+{
+  "id": "resnet-18-cifar10-ours-parallel-8-convert",
+  "engine": "conversion",
+  "stage": "convert",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "paper": [
+    "Figure A1"
+  ],
+  "parameters": {
+    "architecture": "ResNet-18",
+    "converter": "parallel",
+    "dataset": "CIFAR10",
+    "method": "ours",
+    "time": 8,
+    "model_family": "cnn",
+    "batch": 64,
+    "inference_seed": 2026,
+    "precision": "float32",
+    "amp": false,
+    "tf32": false,
+    "energy_pj_per_sop": 1.5,
+    "sample_split": "test",
+    "samples": 10000,
+    "analog_mac_in_energy": false,
+    "native_time": true,
+    "calibration_batch": 64,
+    "calibration_split": "train",
+    "calibration_samples": 8192,
+    "calibration_seed": 2025,
+    "activation_bound_multiplier": 0.5,
+    "gamma": 0.5,
+    "passes": 8,
+    "ema_decay": 0.99,
+    "pool_seed": 2025,
+    "fusion_profile": "strict-fp32"
+  },
+  "required_inputs": [
+    "checkpoint"
+  ]
+}

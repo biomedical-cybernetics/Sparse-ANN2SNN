@@ -1,0 +1,40 @@
+{
+  "id": "vgg-16-linear99-cifar10-ours-dcgs-test-convert",
+  "engine": "conversion",
+  "stage": "convert",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "paper": [
+    "Figure A1",
+    "Main CNN accuracy-energy figure",
+    "Table 1"
+  ],
+  "parameters": {
+    "architecture": "VGG-16-Linear99",
+    "converter": "dcgs-test",
+    "dataset": "CIFAR10",
+    "method": "ours",
+    "time": 4,
+    "model_family": "cnn",
+    "batch": 64,
+    "inference_seed": 2026,
+    "precision": "float32",
+    "amp": false,
+    "tf32": false,
+    "energy_pj_per_sop": 1.5,
+    "sample_split": "test",
+    "samples": 10000,
+    "analog_mac_in_energy": false,
+    "native_time": true,
+    "calibration_batch": 128,
+    "calibration_split": "test",
+    "calibration_samples": 10000,
+    "calibration_seed": 2025
+  },
+  "required_inputs": [
+    "checkpoint"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "6conv2fc-cifar100-dpap-dpap-direct-t8-evaluate",
+  "engine": "conversion",
+  "stage": "evaluate",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "paper": [
+    "Table4/dpap"
+  ],
+  "parameters": {
+    "architecture": "6Conv2FC",
+    "converter": "direct",
+    "dataset": "CIFAR100",
+    "method": "dpap-dpap",
+    "time": 8,
+    "model_family": "cnn",
+    "batch": 64,
+    "inference_seed": 2026,
+    "precision": "float32",
+    "amp": false,
+    "tf32": false,
+    "energy_pj_per_sop": 1.5,
+    "sample_split": "test",
+    "samples": 10000,
+    "analog_mac_in_energy": false,
+    "native_time": true,
+    "calibration_batch": 128,
+    "baseline": "DPAP"
+  },
+  "required_inputs": [
+    "checkpoint"
+  ]
+}

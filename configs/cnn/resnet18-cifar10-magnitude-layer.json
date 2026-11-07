@@ -1,0 +1,42 @@
+{
+  "id": "resnet18-cifar10-magnitude-layer",
+  "engine": "cnn",
+  "stage": "prune",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "world_size": 1,
+  "paper": [
+    "Table 6"
+  ],
+  "parameters": {
+    "backend": "controls",
+    "job": {
+      "architecture": "ResNet-18",
+      "dataset": "CIFAR10",
+      "method": "magnitude-layer",
+      "dropout": null
+    },
+    "checkpoint_selection": {
+      "metric": "accuracy",
+      "tie": "earliest",
+      "require_final_mask_budget": true
+    },
+    "pruning_configuration": {
+      "conv_sparsity": 0.7,
+      "one_shot_no_finetune": true,
+      "initialization": "original-same-seed-dense; isolated seed+100000 mask RNG",
+      "optimizer_steps": 0
+    }
+  },
+  "required_inputs": [
+    "ours_output",
+    "dense_output"
+  ],
+  "outputs": {
+    "checkpoint": "artifacts/best_model.pth",
+    "masks": "artifacts/best_masks.pth"
+  }
+}

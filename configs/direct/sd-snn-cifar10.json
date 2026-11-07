@@ -1,0 +1,35 @@
+{
+  "id": "sd-snn-cifar10",
+  "engine": "direct",
+  "stage": "train",
+  "seeds": [
+    36,
+    37,
+    38
+  ],
+  "paper": [
+    "Table 4"
+  ],
+  "required_inputs": [],
+  "parameters": {
+    "implementation": "SD-SNN",
+    "dataset": "CIFAR10",
+    "epochs": 600,
+    "batch_size": 50,
+    "base_learning_rate": 0.005,
+    "effective_learning_rate": 0.000244140625,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "minimum_learning_rate": 1e-05,
+    "warmup_epochs": 5,
+    "warmup_learning_rate": 1e-06,
+    "cooldown_epochs": 10,
+    "timesteps": 8,
+    "checkpoint_interval": 20,
+    "checkpoint_selection": "earliest-strict-best-test-accuracy",
+    "validation_split": "test",
+    "precision": "fp32",
+    "world_size": 1
+  }
+}

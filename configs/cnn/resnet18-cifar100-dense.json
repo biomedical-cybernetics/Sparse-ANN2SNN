@@ -1,0 +1,46 @@
+{
+  "id": "resnet18-cifar100-dense",
+  "engine": "cnn",
+  "stage": "train",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "world_size": 1,
+  "paper": [
+    "Table 1",
+    "Figure 3",
+    "Figure A2",
+    "Table A1",
+    "Table 5"
+  ],
+  "parameters": {
+    "backend": "dst",
+    "job": {
+      "architecture": "ResNet-18",
+      "dataset": "CIFAR100",
+      "method": "dense",
+      "dropout": null
+    },
+    "checkpoint_selection": {
+      "metric": "accuracy",
+      "tie": "earliest",
+      "require_final_mask_budget": false
+    },
+    "training_configuration": {
+      "epochs": 200,
+      "batch": 128,
+      "lr": 0.1,
+      "precision": "bf16-autocast-fp32-state",
+      "eta_min": 0.0,
+      "update_order": "train-scheduler-evaluate-evolve-checkpoint"
+    }
+  },
+  "required_inputs": [],
+  "outputs": {
+    "checkpoint": "artifacts/best_model.pth",
+    "masks": "artifacts/best_masks.pth",
+    "resume": "artifacts/checkpoints/last_checkpoint.pth"
+  }
+}

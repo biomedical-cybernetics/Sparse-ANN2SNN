@@ -1,0 +1,70 @@
+{
+  "id": "deit-dcgs-energy",
+  "engine": "conversion",
+  "stage": "evaluate",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "paper": [
+    "Table 2"
+  ],
+  "parameters": {
+    "model_family": "deit",
+    "architecture": "DeiT-B/16",
+    "dataset": "ImageNet-1K",
+    "measurement": "energy",
+    "world_size": 4,
+    "configured_batch_size": 25,
+    "effective_batch_size_per_rank": 37,
+    "time": 32,
+    "endpoint": 8,
+    "num_thresholds": 8,
+    "threshold_scale": 4.0,
+    "calibration_mode": "99.9%",
+    "calibration_level": "channel",
+    "calibration_split": "validation",
+    "calibration_saved_rank": 0,
+    "calibration_samples_per_rank": 12500,
+    "calibration_seed": 2025,
+    "inference_seed": 2026,
+    "evaluation_samples": 1480,
+    "energy_batches_per_rank": 10,
+    "energy_pj_per_sop": 1.5,
+    "inference_threshold_level": "layer",
+    "disable_tf32": false
+  },
+  "required_inputs": [
+    "checkpoint"
+  ],
+  "applies_to": [
+    {
+      "methods": [
+        "ours"
+      ],
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "methods": [
+        "dense",
+        "sparsegpt",
+        "ria-reconstruction",
+        "wanda-reconstruction",
+        "ria",
+        "wanda",
+        "ri",
+        "magnitude"
+      ],
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    }
+  ]
+}

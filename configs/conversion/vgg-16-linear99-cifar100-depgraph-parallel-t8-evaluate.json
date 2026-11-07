@@ -1,0 +1,35 @@
+{
+  "id": "vgg-16-linear99-cifar100-depgraph-parallel-t8-evaluate",
+  "engine": "conversion",
+  "stage": "evaluate",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "paper": [
+    "Figure A2"
+  ],
+  "parameters": {
+    "architecture": "VGG-16-Linear99",
+    "converter": "parallel",
+    "dataset": "CIFAR100",
+    "method": "depgraph",
+    "time": 8,
+    "model_family": "cnn",
+    "batch": 64,
+    "inference_seed": 2026,
+    "precision": "float32",
+    "amp": false,
+    "tf32": false,
+    "energy_pj_per_sop": 1.5,
+    "sample_split": "test",
+    "samples": 10000,
+    "analog_mac_in_energy": false,
+    "native_time": true,
+    "calibration_batch": 64
+  },
+  "required_inputs": [
+    "checkpoint"
+  ]
+}

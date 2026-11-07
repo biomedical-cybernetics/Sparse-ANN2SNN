@@ -1,0 +1,44 @@
+{
+  "id": "vgg-16-linear99-cifar100-ours-parallel-32-convert",
+  "engine": "conversion",
+  "stage": "convert",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "paper": [
+    "Figure A2"
+  ],
+  "parameters": {
+    "architecture": "VGG-16-Linear99",
+    "converter": "parallel",
+    "dataset": "CIFAR100",
+    "method": "ours",
+    "time": 32,
+    "model_family": "cnn",
+    "batch": 64,
+    "inference_seed": 2026,
+    "precision": "float32",
+    "amp": false,
+    "tf32": false,
+    "energy_pj_per_sop": 1.5,
+    "sample_split": "test",
+    "samples": 10000,
+    "analog_mac_in_energy": false,
+    "native_time": true,
+    "calibration_batch": 64,
+    "calibration_split": "train",
+    "calibration_samples": 8192,
+    "calibration_seed": 2025,
+    "activation_bound_multiplier": 0.5,
+    "gamma": 0.5,
+    "passes": 8,
+    "ema_decay": 0.99,
+    "pool_seed": 2025,
+    "fusion_profile": "scale-prediction-audit"
+  },
+  "required_inputs": [
+    "checkpoint"
+  ]
+}

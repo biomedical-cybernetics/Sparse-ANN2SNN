@@ -1,0 +1,377 @@
+{
+  "dcgs": {
+    "repository": "https://github.com/h-z-h-cell/ANN-to-SNN-DCGS",
+    "commit": "5e0e4c73f1d0e8e17d81befa24ff947deec1f4be",
+    "archive_url": "https://codeload.github.com/h-z-h-cell/ANN-to-SNN-DCGS/tar.gz/5e0e4c73f1d0e8e17d81befa24ff947deec1f4be",
+    "files": [
+      {
+        "path": "converter/__init__.py",
+        "edits": []
+      },
+      {
+        "path": "converter/converter.py",
+        "edits": [
+          {
+            "start": 7,
+            "end": 9,
+            "replacement": [
+              "from ..neurons import *\n",
+              "from ..utils import MyatSequential\n",
+              "\n",
+              "CNN_Models = ['vgg', 'resnet', 'stbpann']\n",
+              "\n",
+              "def iscnn(name : str) -> bool:\n",
+              "    _is = False\n",
+              "    for n in CNN_Models:\n",
+              "        if n in name:\n",
+              "            _is = True\n",
+              "            break\n",
+              "    return _is\n",
+              "\n"
+            ]
+          },
+          {
+            "start": 39,
+            "end": 39,
+            "replacement": [
+              "        '''\n",
+              "        Thanks to the depth-first recursion, this can work, but fragile......\n",
+              "        '''\n"
+            ]
+          },
+          {
+            "start": 114,
+            "end": 115,
+            "replacement": [
+              "                if \"threhook\" in module.__class__.__name__.lower() and module.out.__class__.__name__.lower() in ['linear','conv2d','conv2d_cht']:\n"
+            ]
+          },
+          {
+            "start": 124,
+            "end": 125,
+            "replacement": [
+              "            elif iscnn(args.model_name.lower()):\n"
+            ]
+          },
+          {
+            "start": 129,
+            "end": 130,
+            "replacement": [
+              "                elif \"threhook\" in module.__class__.__name__.lower() and module.out.__class__.__name__.lower() in ['linear','conv2d','conv2d_cht']:\n"
+            ]
+          },
+          {
+            "start": 135,
+            "end": 136,
+            "replacement": [
+              "                    scale = 4\n"
+            ]
+          },
+          {
+            "start": 145,
+            "end": 146,
+            "replacement": [
+              "                    elif module.out.__class__.__name__.lower() in ['linear','conv2d','conv2d_cht']:\n"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "converter/threshold_getter.py",
+        "edits": [
+          {
+            "start": 8,
+            "end": 9,
+            "replacement": [
+              "\n"
+            ]
+          },
+          {
+            "start": 29,
+            "end": 30,
+            "replacement": [
+              "        \n",
+              "        local_rank = int(os.environ.get(\"LOCAL_RANK\", 0))\n",
+              "        iterator = tqdm(self.dataloader) if local_rank == 0 else self.dataloader\n",
+              "        for batch_idx, (imgs, _) in enumerate(iterator):\n"
+            ]
+          },
+          {
+            "start": 43,
+            "end": 44,
+            "replacement": [
+              "                if module.mean is not None:\n",
+              "                    model._modules[name].get_scale_from_var(T=T)\n"
+            ]
+          },
+          {
+            "start": 53,
+            "end": 54,
+            "replacement": [
+              "            if module.__class__.__name__.lower() in [\"relu\",'gelu','silu','layernorm','groupnorm','softmax','myat','linear','conv2d','conv2d_cht']:\n"
+            ]
+          },
+          {
+            "start": 55,
+            "end": 56,
+            "replacement": [
+              "                if int(os.environ.get(\"LOCAL_RANK\", 0)) == 0:\n",
+              "                     print(\"Replace \"+module.__class__.__name__.lower()+\" By ThreHook\")\n"
+            ]
+          },
+          {
+            "start": 82,
+            "end": 83,
+            "replacement": [
+              "    def save_model(model, model_path, mode_fx, code_path=None, pruning=''):\n"
+            ]
+          },
+          {
+            "start": 86,
+            "end": 86,
+            "replacement": [
+              "            if pruning == 'depgraph':\n",
+              "                model_dir = os.path.dirname(model_path)\n",
+              "                if model_dir and not os.path.exists(model_dir):\n",
+              "                    os.makedirs(model_dir)\n",
+              "                torch.save(model, model_path+'.pth')\n",
+              "                return\n"
+            ]
+          },
+          {
+            "start": 101,
+            "end": 102,
+            "replacement": [
+              "        if int(os.environ.get(\"LOCAL_RANK\", 0)) == 0:\n",
+              "            print(model_dir)\n"
+            ]
+          },
+          {
+            "start": 164,
+            "end": 164,
+            "replacement": [
+              "    eps = 1e-6\n"
+            ]
+          },
+          {
+            "start": 179,
+            "end": 180,
+            "replacement": [
+              "    erf_input = (coeff - mean.unsqueeze(-1)) / (sqrt2 * (sigma.unsqueeze(-1) + eps))\n"
+            ]
+          },
+          {
+            "start": 189,
+            "end": 190,
+            "replacement": [
+              "    exp_input = -((coeff - mean.unsqueeze(-1))**2) / (2 * (var.unsqueeze(-1) + eps))\n"
+            ]
+          },
+          {
+            "start": 194,
+            "end": 195,
+            "replacement": [
+              "    denominator = 1 - term2_sum + eps\n"
+            ]
+          },
+          {
+            "start": 197,
+            "end": 198,
+            "replacement": [
+              "    part1 = (mean / (theta + eps)) * (1 - term1_sum) / denominator\n"
+            ]
+          },
+          {
+            "start": 199,
+            "end": 200,
+            "replacement": [
+              "    part2 = (sigma / (sqrt_pi_over_2 * (theta + eps))) * term3_sum / denominator\n"
+            ]
+          },
+          {
+            "start": 223,
+            "end": 223,
+            "replacement": [
+              "\n",
+              "        # Keep all buffers on one device to avoid CPU fallback in calculate_better.\n",
+              "        target_device = self.mean.device\n",
+              "        if self.var.device != target_device:\n",
+              "            self.var = self.var.to(target_device)\n",
+              "        if self.scale is not None and self.scale.device != target_device:\n",
+              "            self.scale = self.scale.to(target_device)\n",
+              "\n"
+            ]
+          },
+          {
+            "start": 229,
+            "end": 230,
+            "replacement": [
+              "            if int(os.environ.get(\"LOCAL_RANK\", 0)) == 0:\n",
+              "                print(f\"Found {nan_mask.sum().item()} NaN values, replacing with original thresholds\")\n"
+            ]
+          },
+          {
+            "start": 233,
+            "end": 234,
+            "replacement": [
+              "            if int(os.environ.get(\"LOCAL_RANK\", 0)) == 0:\n",
+              "                print(f\"Found 0 NaN values, replacing with original thresholds\")\n"
+            ]
+          },
+          {
+            "start": 305,
+            "end": 306,
+            "replacement": [
+              "            if self.out.__class__.__name__.lower() not in ['linear','conv2d','conv2d_cht']:\n"
+            ]
+          },
+          {
+            "start": 339,
+            "end": 340,
+            "replacement": [
+              "            if self.out.__class__.__name__.lower() in ['linear','conv2d','conv2d_cht']:\n"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "utils/__init__.py",
+        "edits": []
+      },
+      {
+        "path": "neurons/__init__.py",
+        "edits": []
+      },
+      {
+        "path": "neurons/relu_neuron.py",
+        "edits": [
+          {
+            "start": 4,
+            "end": 5,
+            "replacement": [
+              "from ..utils import MergeTemporalDim, ExpandTemporalDim\n"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "neurons/nonlinear_neuron.py",
+        "edits": [
+          {
+            "start": 4,
+            "end": 5,
+            "replacement": [
+              "from ..utils import MergeTemporalDim, ExpandTemporalDim\n"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "neurons/line_neuron.py",
+        "edits": [
+          {
+            "start": 4,
+            "end": 5,
+            "replacement": [
+              "from ..utils import MergeTemporalDim, ExpandTemporalDim\n"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "forwards/__init__.py",
+        "edits": [
+          {
+            "start": 3,
+            "end": 4,
+            "replacement": [
+              "from ..utils import *\n"
+            ]
+          },
+          {
+            "start": 132,
+            "end": 134,
+            "replacement": [
+              "    output.append(self.init_forward(torch.zeros_like(x)).detach())\n",
+              "    output.append(self.init_forward(x).detach())\n"
+            ]
+          },
+          {
+            "start": 137,
+            "end": 138,
+            "replacement": [
+              "        output.append((self.init_forward(torch.zeros_like(x))*mul).detach())\n"
+            ]
+          },
+          {
+            "start": 154,
+            "end": 155,
+            "replacement": [
+              "    output.append(tmp.detach())\n"
+            ]
+          },
+          {
+            "start": 156,
+            "end": 157,
+            "replacement": [
+              "    output.append(tmp.detach())\n"
+            ]
+          },
+          {
+            "start": 159,
+            "end": 160,
+            "replacement": [
+              "        output.append(tmp.detach())\n"
+            ]
+          },
+          {
+            "start": 173,
+            "end": 174,
+            "replacement": [
+              "        output.append((self.init_forward(x/mul)*mul).detach())\n"
+            ]
+          },
+          {
+            "start": 193,
+            "end": 195,
+            "replacement": [
+              "        tmp = self.init_forward(x)\n",
+              "        output.append(tmp.detach())\n"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "forwards/encoder.py",
+        "edits": []
+      },
+      {
+        "path": "forwards/decoder.py",
+        "edits": []
+      },
+      {
+        "path": "models/ViT.py",
+        "edits": [
+          {
+            "start": 8,
+            "end": 9,
+            "replacement": [
+              "from ..utils import MyAt\n"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "parallel": {
+    "repository": "https://github.com/hzc1208/Parallel_Conversion",
+    "commit": "622d40fc546ac619132751228bf7aea833b6deac",
+    "archive_url": "https://codeload.github.com/hzc1208/Parallel_Conversion/tar.gz/622d40fc546ac619132751228bf7aea833b6deac",
+    "files": [
+      {
+        "path": "modules.py",
+        "edits": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "resnet-18-cifar10-ours80-dcgs-test-convert",
+  "engine": "conversion",
+  "stage": "convert",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "paper": [
+    "Table A1"
+  ],
+  "parameters": {
+    "architecture": "ResNet-18",
+    "converter": "dcgs-test",
+    "dataset": "CIFAR10",
+    "method": "ours80",
+    "time": 8,
+    "model_family": "cnn",
+    "batch": 64,
+    "inference_seed": 2026,
+    "precision": "float32",
+    "amp": false,
+    "tf32": false,
+    "energy_pj_per_sop": 1.5,
+    "sample_split": "test",
+    "samples": 10000,
+    "analog_mac_in_energy": false,
+    "native_time": true,
+    "calibration_batch": 128,
+    "calibration_split": "test",
+    "calibration_samples": 10000,
+    "calibration_seed": 2025
+  },
+  "required_inputs": [
+    "checkpoint"
+  ]
+}

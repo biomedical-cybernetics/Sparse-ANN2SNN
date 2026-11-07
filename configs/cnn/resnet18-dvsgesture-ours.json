@@ -1,0 +1,52 @@
+{
+  "id": "resnet18-dvsgesture-ours",
+  "engine": "cnn",
+  "stage": "train",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "world_size": 1,
+  "paper": [
+    "Table 5"
+  ],
+  "parameters": {
+    "backend": "dst",
+    "job": {
+      "architecture": "ResNet-18",
+      "dataset": "DVSGesture",
+      "method": "ours",
+      "dropout": null
+    },
+    "checkpoint_selection": {
+      "metric": "accuracy",
+      "tie": "earliest",
+      "require_final_mask_budget": true
+    },
+    "training_configuration": {
+      "epochs": 300,
+      "batch": 32,
+      "lr": 0.001,
+      "precision": "bf16-autocast-fp32-state",
+      "eta_min": 0.0,
+      "conv_target": 0.7,
+      "linear_target": 0.99,
+      "linear_horizon": 225,
+      "conv_rewire": 0.05,
+      "linear_alpha": 0.3,
+      "linear_sgd_momentum_mask": false,
+      "conv_latent_weights": true,
+      "update_order": "train-scheduler-evaluate-evolve-checkpoint",
+      "dense_gradient_batches": 1,
+      "conv_density_window": 225,
+      "conv_updates": 300
+    }
+  },
+  "required_inputs": [],
+  "outputs": {
+    "checkpoint": "artifacts/best_model.pth",
+    "masks": "artifacts/best_masks.pth",
+    "resume": "artifacts/checkpoints/last_checkpoint.pth"
+  }
+}

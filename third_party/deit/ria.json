@@ -1,0 +1,46 @@
+{
+  "repository": "https://github.com/biomedical-cybernetics/Relative-importance-and-activation-pruning",
+  "commit": "7bc55b06924659ea977f7804b773ce3ef0d55c2f",
+  "files": [
+    {
+      "name": "layerwrapper.py",
+      "url": "https://raw.githubusercontent.com/biomedical-cybernetics/Relative-importance-and-activation-pruning/7bc55b06924659ea977f7804b773ce3ef0d55c2f/lib/layerwrapper.py",
+      "patch": []
+    },
+    {
+      "name": "sparsegpt.py",
+      "url": "https://raw.githubusercontent.com/biomedical-cybernetics/Relative-importance-and-activation-pruning/7bc55b06924659ea977f7804b773ce3ef0d55c2f/lib/sparsegpt.py",
+      "patch": []
+    },
+    {
+      "name": "quant.py",
+      "url": "https://raw.githubusercontent.com/biomedical-cybernetics/Relative-importance-and-activation-pruning/7bc55b06924659ea977f7804b773ce3ef0d55c2f/lib/quant.py",
+      "patch": [
+        {
+          "start": 1,
+          "end": 1,
+          "replacement": [
+            "\n"
+          ]
+        },
+        {
+          "start": 2,
+          "end": 2,
+          "replacement": [
+            "\n"
+          ]
+        },
+        {
+          "start": 3,
+          "end": 4,
+          "replacement": []
+        },
+        {
+          "start": 128,
+          "end": 213,
+          "replacement": []
+        }
+      ]
+    }
+  ]
+}

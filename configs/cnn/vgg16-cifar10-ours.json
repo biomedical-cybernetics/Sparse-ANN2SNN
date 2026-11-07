@@ -1,0 +1,91 @@
+{
+  "id": "vgg16-cifar10-ours",
+  "engine": "cnn",
+  "stage": "train",
+  "seeds": [
+    15,
+    16,
+    17
+  ],
+  "world_size": 1,
+  "paper": [
+    "Table 1",
+    "Figure 3",
+    "Figure A1"
+  ],
+  "parameters": {
+    "backend": "vgg",
+    "job": {
+      "variant": "linear99",
+      "dataset": "CIFAR10",
+      "method": "ours"
+    },
+    "checkpoint_selection": {
+      "metric": "accuracy",
+      "tie": "earliest",
+      "require_final_mask_budget": true
+    },
+    "training_configuration": {
+      "dropout": 0.5,
+      "optimizer": "SGD",
+      "lr": 0.1,
+      "batch": 128,
+      "momentum": 0.9,
+      "nesterov": true,
+      "weight_decay": 0.0005,
+      "epochs": 300,
+      "warmup": 5,
+      "start_factor": 0.1,
+      "eta_min": 0.0,
+      "precision": "bf16-forward-fp32-state-eval-topology",
+      "scaler": false,
+      "tf32": false,
+      "cpu_threads": 1,
+      "workers": 0,
+      "ours": {
+        "conv": [
+          0.5,
+          0.7
+        ],
+        "density_window": 225,
+        "conv_updates": 300,
+        "rewire": 0.05,
+        "ss_k": 1,
+        "delta": [
+          0.25,
+          0.75,
+          0.01
+        ],
+        "delta_remove": 1.0,
+        "cm": false,
+        "conv_chain": false,
+        "linear": [
+          0.5,
+          0.99
+        ],
+        "linear_updates": 225,
+        "k": 6,
+        "brf_r": 0.1,
+        "degree_dist": "uniform",
+        "linear_chain": true,
+        "zeta": 0.3,
+        "adaptive_zeta": "cosine",
+        "sampling_delta": [
+          0.5,
+          0.75,
+          0.01
+        ],
+        "linear_sgd_momentum_mask": false,
+        "conv_latent_weights": true
+      },
+      "selection": "full-test earliest maximum actual-budget-qualified",
+      "order": "train-scheduler-evaluate-evolve-recovery"
+    }
+  },
+  "required_inputs": [],
+  "outputs": {
+    "checkpoint": "artifacts/best_model.pth",
+    "masks": "artifacts/best_masks.pth",
+    "resume": "artifacts/checkpoints/last_checkpoint.pth"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "deit-imagenet-wanda-reconstruction",
+  "engine": "deit",
+  "stage": "prune",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "paper": [
+    "Table 2"
+  ],
+  "required_inputs": [
+    "checkpoint"
+  ],
+  "depends_on": [
+    "deit-imagenet-dense"
+  ],
+  "parameters": {
+    "implementation": "pruning",
+    "method": "wanda",
+    "reconstruction": true,
+    "sparsity": 0.7,
+    "calibration_samples": 128,
+    "calibration_split": "test",
+    "world_size": 4,
+    "per_gpu_batch_size": 128,
+    "arguments": [
+      "--model",
+      "deit_base_patch16_224",
+      "--prune_method",
+      "wanda",
+      "--sparsity_ratio",
+      "0.7",
+      "--nsamples",
+      "128",
+      "--batch-size",
+      "128",
+      "--data-set",
+      "IMNET",
+      "--reconstruction"
+    ]
+  }
+}
